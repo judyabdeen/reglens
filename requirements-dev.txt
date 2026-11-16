@@ -1,0 +1,6 @@
+-r requirements.txt
+pytest>=8.0
+# Optional. The tests in tests/test_web_browser.py open the web page in a real browser. They are skipped unless you run
+#   pip install playwright
+#   playwright install chromium
+# (Node.js 20 or newer, if installed, also lets pytest run the page's logic tests in tests/js.)

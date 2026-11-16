@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RegLens</title>
+  <meta name="description" content="Cited answers about EU and US AI and data-protection rules, with the exact source passage and its legal status.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <script src="/static/theme.js"></script>
+  <link rel="stylesheet" href="/static/app.css">
+  <script type="module" src="/static/app.mjs"></script>
+</head>
+<body>
+  <a class="skip" href="#question">Skip to the question box</a>
+
+  <header class="bar">
+    <div class="shell bar-inner">
+      <a class="brand" href="/" aria-label="RegLens, start page">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+          <circle cx="14.5" cy="14.5" r="9" fill="none" stroke="currentColor" stroke-width="2.4"/>
+          <path d="M21.5 21.5l6 6" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+          <text x="14.5" y="19.4" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="13" font-weight="700" fill="currentColor">§</text>
+        </svg>
+        <span class="brand-name">RegLens</span>
+      </a>
+      <p class="bar-status" id="bar-status">Connecting to the server</p>
+      <div class="bar-actions">
+        <button type="button" class="btn quiet" id="new-chat" disabled>New conversation</button>
+        <button type="button" class="btn quiet" id="save-chat" disabled>Save as Markdown</button>
+        <button type="button" class="icon-btn" id="theme" aria-label="Switch between light and dark"></button>
+        <button type="button" class="icon-btn" id="about-open" aria-label="How RegLens works" aria-haspopup="dialog"></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="shell notices" id="notices"></div>
+
+  <main class="page shell" id="thread" aria-label="Conversation">
+    <noscript><p class="noscript">RegLens needs JavaScript to run. Turn it on for this page and reload.</p></noscript>
+  </main>
+
+  <form class="dock" id="dock" autocomplete="off">
+    <div class="shell dock-inner">
+      <div class="dock-top">
+        <div class="modes" role="radiogroup" aria-label="What to answer with" id="modes"></div>
+        <button type="button" class="scope-btn" id="scope-open" disabled aria-haspopup="dialog">
+          <span class="scope-text" id="scope-text">Scope and settings</span>
+        </button>
+      </div>
+      <div class="dock-main">
+        <label class="sr-only" for="question">Your question</label>
+        <textarea id="question" rows="1" maxlength="2000" placeholder="Ask about the AI Act, the GDPR, HIPAA, the CCPA" disabled></textarea>
+        <button type="submit" class="btn primary ask" id="ask" disabled title="Ask (Enter)"></button>
+      </div>
+      <p class="hint" id="hint"></p>
+    </div>
+  </form>
+
+  <dialog class="sheet drawer" id="scope" aria-labelledby="scope-title">
+    <div class="sheet-head">
+      <h2 id="scope-title">Scope and search settings</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close"></button>
+    </div>
+    <div class="sheet-body" id="scope-body"></div>
+    <div class="sheet-foot">
+      <button type="button" class="btn quiet" id="reset-settings">Reset to defaults</button>
+      <button type="button" class="btn primary" data-close>Done</button>
+    </div>
+  </dialog>
+
+  <dialog class="sheet reader" id="reader" aria-labelledby="reader-title">
+    <div class="sheet-head">
+      <h2 id="reader-title">Passage</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close"></button>
+    </div>
+    <div class="sheet-body" id="reader-body"></div>
+    <div class="sheet-foot" id="reader-foot"></div>
+  </dialog>
+
+  <dialog class="sheet about" id="about" aria-labelledby="about-title">
+    <div class="sheet-head">
+      <h2 id="about-title">How RegLens works</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close"></button>
+    </div>
+    <div class="sheet-body" id="about-body"></div>
+    <div class="sheet-foot">
+      <button type="button" class="btn primary" data-close>Close</button>
+    </div>
+  </dialog>
+
+  <div class="sr-only" id="live" role="status" aria-live="polite"></div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+# RegLens runtime dependencies.
+# Written against Python 3.13 with requests 2.34, python-dotenv 1.2 and pypdf 6.17 (ingestion, tests).
+# The vector database and the embedding models (the last three packages) can only be checked on a real
+# machine: run `python scripts/check_stack.py` after installing.
+# Packages for later steps are added together with the code that uses them.
+requests>=2.32
+python-dotenv>=1.0
+# pypdf is held below 7 on purpose: 7.0 (released 2026-11-06) raises an error when it extracts text from
+# PDFs whose streams use abbreviated filter names (https://github.com/py-pdf/pypdf/issues/4371).
+# Re-check that issue before raising this limit.
+pypdf>=5.0,<7
+# Some official PDFs are encrypted with an empty password (editing locked); pypdf needs this package
+# to open the AES-encrypted ones.
+cryptography>=43
+# Reads the saved web pages (ICO, EDPB and other HTML guidance) in the ingestion step.
+beautifulsoup4>=4.12
+
+# --- Retrieval (embeddings, vector database, re-ranking) -------------------------------------------------
+numpy>=1.26
+# Vector database (assignment 2.3). The 1.x API is used: PersistentClient and a collection "configuration".
+chromadb>=1.0,<2
+# Local embedding model (BAAI/bge-small-en-v1.5, about 130 MB) and re-ranking model (about 90 MB). This pulls in
+# torch and transformers, so the first install downloads roughly 1-2 GB.
+sentence-transformers>=5.0,<7
+
+# --- Web interface (python scripts/serve.py) -------------------------------------------------------------
+# Starlette (small ASGI toolkit, the base of FastAPI) and uvicorn (the server). Developed and tested against
+# starlette 1.7 and uvicorn 0.54; only long-stable parts of their interfaces are used, so versions inside these
+# ranges should work, and ChromaDB's own requirements decide the exact versions pip installs.
+starlette>=0.40,<2
+uvicorn>=0.30,<1
